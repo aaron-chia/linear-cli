@@ -59,13 +59,15 @@ type IssueFullDTO struct {
 // IssueDetailedDTO contains complete issue details with truncated comments (~500 tokens)
 type IssueDetailedDTO struct {
 	issueBaseFields
-	Comments []CommentSummaryDTO `json:"comments"`
+	Comments     []CommentSummaryDTO `json:"comments"`
+	CommentsHint string              `json:"_comments_hint,omitempty"`
 }
 
 // CommentSummaryDTO is a comment with a truncated body for the detailed view
 type CommentSummaryDTO struct {
 	ID        string   `json:"id"`
 	Body      string   `json:"body"`
+	Truncated bool     `json:"truncated"`
 	User      *UserDTO `json:"user"`
 	CreatedAt string   `json:"createdAt"`
 }
@@ -395,9 +397,11 @@ func IssueToDetailedDTO(issue *core.Issue) IssueDetailedDTO {
 	if issue.Comments != nil && len(issue.Comments.Nodes) > 0 {
 		dto.Comments = make([]CommentSummaryDTO, len(issue.Comments.Nodes))
 		for i, comment := range issue.Comments.Nodes {
+			body := truncate(cleanDescription(comment.Body), 200)
 			dto.Comments[i] = CommentSummaryDTO{
 				ID:        comment.ID,
-				Body:      truncate(cleanDescription(comment.Body), 200),
+				Body:      body,
+				Truncated: len(comment.Body) > 200,
 				User: &UserDTO{
 					ID:   comment.User.ID,
 					Name: comment.User.Name,
@@ -405,6 +409,7 @@ func IssueToDetailedDTO(issue *core.Issue) IssueDetailedDTO {
 				CreatedAt: comment.CreatedAt,
 			}
 		}
+		dto.CommentsHint = "Comment bodies are truncated. Use --format full or 'linear issues comments " + issue.Identifier + "' for full text."
 	}
 
 	return dto
