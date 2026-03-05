@@ -65,8 +65,16 @@
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:dev.to)",
       "WebFetch(domain:studio.apollographql.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:proxy.golang.org)",
+      "WebFetch(domain:api.linear.app)",
+      "WebFetch(domain:uploads.linear.app)"
     ],
     "deny": []
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false
   }
 }
