@@ -164,10 +164,36 @@ func LoadTokenWithFallback() string {
 	return LoadTokenFromEnv()
 }
 
-// LoadTokenFromEnv loads a Linear token from environment variables.
-// Uses LINEAR_API_KEY as the canonical env var for direct API-key auth.
+// LoadTokenFromEnv loads a Linear token from environment variables,
+// falling back to ~/.agents/secrets.json if the env var is not set.
+// Uses LINEAR_API_KEY as the canonical key in both sources.
 func LoadTokenFromEnv() string {
-	return SanitizeToken(os.Getenv("LINEAR_API_KEY"))
+	if t := SanitizeToken(os.Getenv("LINEAR_API_KEY")); t != "" {
+		return t
+	}
+	return LoadTokenFromAgentSecrets()
+}
+
+// LoadTokenFromAgentSecrets reads LINEAR_API_KEY from ~/.agents/secrets.json.
+// This provides a shared credential store for AI agents without requiring
+// environment variables or per-tool token files.
+func LoadTokenFromAgentSecrets() string {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return ""
+	}
+
+	data, err := os.ReadFile(filepath.Join(homeDir, ".agents", "secrets.json"))
+	if err != nil {
+		return ""
+	}
+
+	var secrets map[string]string
+	if err := json.Unmarshal(data, &secrets); err != nil {
+		return ""
+	}
+
+	return SanitizeToken(secrets["LINEAR_API_KEY"])
 }
 
 // SaveTokenData saves structured token data as JSON with secure permissions.

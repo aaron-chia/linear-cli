@@ -66,6 +66,8 @@ func TestNewClientWithTokenPath_PreservesAuthMode(t *testing.T) {
 func TestNewClientWithTokenPath_ReturnsNilWhenNoToken(t *testing.T) {
 	tempDir := t.TempDir()
 	tokenPath := filepath.Join(tempDir, "nonexistent_token")
+	t.Setenv("LINEAR_API_KEY", "")  // Clear env var fallback
+	t.Setenv("HOME", t.TempDir())   // Prevent reading ~/.agents/secrets.json
 
 	client := NewClientWithTokenPath(tokenPath)
 	assert.Nil(t, client)
@@ -90,6 +92,7 @@ func TestNewClientWithTokenPath_EnvTokenNotSupported(t *testing.T) {
 
 	t.Setenv("LINEAR_API_KEY", "")
 	t.Setenv("LINEAR_API_TOKEN", "lin_api_env_token_legacy")
+	t.Setenv("HOME", t.TempDir()) // Prevent reading real ~/.agents/secrets.json
 
 	client := NewClientWithTokenPath(tokenPath)
 	assert.Nil(t, client)

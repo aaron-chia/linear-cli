@@ -329,7 +329,11 @@ func handleStatus() error {
 		return nil
 	}
 
+	// Determine token source for display
 	tokenSource := "env"
+	if os.Getenv("LINEAR_API_KEY") == "" {
+		tokenSource = "agent-secrets"
+	}
 	authMode := ""
 	if exists {
 		tokenData, err := tokenStorage.LoadTokenData()
@@ -355,6 +359,8 @@ func handleStatus() error {
 		fmt.Printf("ID: %s\n", viewer.ID)
 		if tokenSource == "env" {
 			fmt.Println("Source: Environment variable (LINEAR_API_KEY)")
+		} else if tokenSource == "agent-secrets" {
+			fmt.Println("Source: Agent secrets (~/.agents/secrets.json)")
 		}
 		// Show auth mode for stored OAuth sessions
 		if tokenSource == "file" {

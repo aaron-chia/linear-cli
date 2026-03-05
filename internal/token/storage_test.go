@@ -189,10 +189,86 @@ func TestLoadTokenFromEnv(t *testing.T) {
 	t.Run("does not use LINEAR_API_TOKEN", func(t *testing.T) {
 		t.Setenv("LINEAR_API_KEY", "")
 		t.Setenv("LINEAR_API_TOKEN", "lin_api_token_only")
+		// Override HOME to prevent reading real ~/.agents/secrets.json
+		t.Setenv("HOME", t.TempDir())
 
 		got := LoadTokenFromEnv()
 		if got != "" {
 			t.Fatalf("expected empty token when only LINEAR_API_TOKEN is set, got %q", got)
+		}
+	})
+}
+
+func TestLoadTokenFromAgentSecrets(t *testing.T) {
+	t.Run("reads LINEAR_API_KEY from secrets file", func(t *testing.T) {
+		// Override HOME to use a temp directory with a mock secrets file
+		tempDir := t.TempDir()
+		t.Setenv("HOME", tempDir)
+
+		agentsDir := filepath.Join(tempDir, ".agents")
+		if err := os.MkdirAll(agentsDir, 0700); err != nil {
+			t.Fatal(err)
+		}
+
+		secretsJSON := `{"LINEAR_API_KEY": "lin_api_from_secrets"}`
+		if err := os.WriteFile(filepath.Join(agentsDir, "secrets.json"), []byte(secretsJSON), 0600); err != nil {
+			t.Fatal(err)
+		}
+
+		got := LoadTokenFromAgentSecrets()
+		if got != "lin_api_from_secrets" {
+			t.Fatalf("expected token from secrets, got %q", got)
+		}
+	})
+
+	t.Run("returns empty when secrets file missing", func(t *testing.T) {
+		tempDir := t.TempDir()
+		t.Setenv("HOME", tempDir)
+
+		got := LoadTokenFromAgentSecrets()
+		if got != "" {
+			t.Fatalf("expected empty token, got %q", got)
+		}
+	})
+
+	t.Run("returns empty when key not in secrets", func(t *testing.T) {
+		tempDir := t.TempDir()
+		t.Setenv("HOME", tempDir)
+
+		agentsDir := filepath.Join(tempDir, ".agents")
+		if err := os.MkdirAll(agentsDir, 0700); err != nil {
+			t.Fatal(err)
+		}
+
+		secretsJSON := `{"OTHER_KEY": "some_value"}`
+		if err := os.WriteFile(filepath.Join(agentsDir, "secrets.json"), []byte(secretsJSON), 0600); err != nil {
+			t.Fatal(err)
+		}
+
+		got := LoadTokenFromAgentSecrets()
+		if got != "" {
+			t.Fatalf("expected empty token, got %q", got)
+		}
+	})
+
+	t.Run("env var takes precedence over agent secrets", func(t *testing.T) {
+		tempDir := t.TempDir()
+		t.Setenv("HOME", tempDir)
+		t.Setenv("LINEAR_API_KEY", "lin_api_from_env")
+
+		agentsDir := filepath.Join(tempDir, ".agents")
+		if err := os.MkdirAll(agentsDir, 0700); err != nil {
+			t.Fatal(err)
+		}
+
+		secretsJSON := `{"LINEAR_API_KEY": "lin_api_from_secrets"}`
+		if err := os.WriteFile(filepath.Join(agentsDir, "secrets.json"), []byte(secretsJSON), 0600); err != nil {
+			t.Fatal(err)
+		}
+
+		got := LoadTokenFromEnv()
+		if got != "lin_api_from_env" {
+			t.Fatalf("expected env var to take precedence, got %q", got)
 		}
 	})
 }
