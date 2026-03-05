@@ -1,5 +1,5 @@
 ---
-name: prd
+name: linear-prd
 description: Create agent-friendly Linear tickets with PRDs, sub-issues, and clear success criteria. Use when planning features or breaking down work for agentic coding.
 ---
 
@@ -104,7 +104,7 @@ linear search "OAuth" --has-dependencies --team ENG
 linear search "user database" --team ENG
 ```
 
-**Pro tip:** Use `/link-deps` skill after creating tickets to discover and establish dependencies.
+**Pro tip:** Use `/linear-link-deps` skill after creating tickets to discover and establish dependencies.
 
 ## Best Practices
 

@@ -69,8 +69,8 @@ exists, you must remove it manually first.`,
   linear skills install --all
 
   # Install a specific skill
-  linear skills install prd
-  linear skills install triage`,
+  linear skills install linear-prd
+  linear skills install linear-triage`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !installAll && len(args) == 0 {
 				return fmt.Errorf("specify a skill name or use --all to install all skills")

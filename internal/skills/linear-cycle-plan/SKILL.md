@@ -1,5 +1,5 @@
 ---
-name: cycle-plan
+name: linear-cycle-plan
 description: Plan Linear cycles using velocity analytics. Suggests scope based on historical capacity, identifies dependency risks, balances workload.
 ---
 

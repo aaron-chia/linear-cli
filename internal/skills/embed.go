@@ -3,7 +3,7 @@ package skills
 
 import "embed"
 
-//go:embed prd/* triage/* cycle-plan/* retro/* deps/* link-deps/* linear/*
+//go:embed linear-reference/* linear-prd/* linear-triage/* linear-cycle-plan/* linear-retro/* linear-deps/* linear-link-deps/*
 var SkillFiles embed.FS
 
 // SkillInfo describes an available skill
@@ -16,39 +16,39 @@ type SkillInfo struct {
 // AvailableSkills lists all skills that can be installed
 var AvailableSkills = []SkillInfo{
 	{
-		Name:        "linear",
+		Name:        "linear-reference",
 		Description: "Linear issue tracking - MUST READ before using Linear commands",
-		Dir:         "linear",
+		Dir:         "linear-reference",
 	},
 	{
-		Name:        "prd",
+		Name:        "linear-prd",
 		Description: "Create agent-friendly tickets with PRDs, sub-issues, and success criteria",
-		Dir:         "prd",
+		Dir:         "linear-prd",
 	},
 	{
-		Name:        "triage",
+		Name:        "linear-triage",
 		Description: "Analyze and prioritize Linear backlog based on staleness and blockers",
-		Dir:         "triage",
+		Dir:         "linear-triage",
 	},
 	{
-		Name:        "cycle-plan",
+		Name:        "linear-cycle-plan",
 		Description: "Plan cycles using velocity analytics and capacity",
-		Dir:         "cycle-plan",
+		Dir:         "linear-cycle-plan",
 	},
 	{
-		Name:        "retro",
+		Name:        "linear-retro",
 		Description: "Generate sprint retrospective analysis from completed cycles",
-		Dir:         "retro",
+		Dir:         "linear-retro",
 	},
 	{
-		Name:        "deps",
+		Name:        "linear-deps",
 		Description: "Analyze dependency chains, find blockers and circular dependencies",
-		Dir:         "deps",
+		Dir:         "linear-deps",
 	},
 	{
-		Name:        "link-deps",
+		Name:        "linear-link-deps",
 		Description: "Discover and link related issues as dependencies across your backlog",
-		Dir:         "link-deps",
+		Dir:         "linear-link-deps",
 	},
 }
 

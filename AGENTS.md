@@ -40,10 +40,10 @@ Then `Read` that path to view the image.
 ### Claude Code Skills
 
 Available workflow skills (install with `linear skills install --all`):
-- `/prd` - Create agent-friendly tickets with PRDs and sub-issues
-- `/triage` - Analyze and prioritize backlog
-- `/cycle-plan` - Plan cycles using velocity analytics
-- `/retro` - Generate sprint retrospectives
-- `/deps` - Analyze dependency chains
+- `/linear-prd` - Create agent-friendly tickets with PRDs and sub-issues
+- `/linear-triage` - Analyze and prioritize backlog
+- `/linear-cycle-plan` - Plan cycles using velocity analytics
+- `/linear-retro` - Generate sprint retrospectives
+- `/linear-deps` - Analyze dependency chains
 
 Run `linear skills list` for details.

@@ -1,5 +1,5 @@
 ---
-name: deps
+name: linear-deps
 description: Visualize and analyze issue dependencies in Linear. Finds blocking chains, circular dependencies, and critical path items.
 ---
 
@@ -132,7 +132,7 @@ linear search --has-circular-deps --team ENG
 linear search --max-depth 5 --team ENG
 ```
 
-**Pro tip:** Use `/link-deps` skill to discover and establish missing dependencies across your backlog.
+**Pro tip:** Use `/linear-link-deps` skill to discover and establish missing dependencies across your backlog.
 
 ## Action Recommendations
 

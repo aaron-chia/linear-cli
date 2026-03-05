@@ -216,7 +216,7 @@ linear search --has-circular-deps --team CEN
 #### Best Practices
 1. **Weekly unblocking routine**: Run `linear search --has-blockers` to find stuck work
 2. **Before creating issues**: Search first to avoid duplicates
-3. **After creating issues**: Use `/link-deps` skill to establish dependencies
+3. **After creating issues**: Use `/linear-link-deps` skill to establish dependencies
 4. **Sprint planning**: Check `linear deps --team CEN` for work order
 5. **Priority alignment**: Ensure foundation work is prioritized over features it blocks
 
@@ -251,13 +251,13 @@ linear issues create "Bug" --attach /tmp/screenshot.png
 ### Skills Usage
 
 After running `linear init`, use these skills:
-- `/linear` - **NEW** Complete CLI reference (MUST READ before using Linear commands)
-- `/prd` - Create agent-friendly tickets (searches for existing work first)
-- `/triage` - Prioritize backlog issues (uses search to find blocked work)
-- `/cycle-plan` - Analyze and plan cycles
-- `/retro` - Generate sprint retrospectives
-- `/deps` - Visualize dependency graphs
-- `/link-deps` - Discover and link missing dependencies across backlog
+- `/linear-reference` - Complete CLI reference (MUST READ before using Linear commands)
+- `/linear-prd` - Create agent-friendly tickets (searches for existing work first)
+- `/linear-triage` - Prioritize backlog issues (uses search to find blocked work)
+- `/linear-cycle-plan` - Analyze and plan cycles
+- `/linear-retro` - Generate sprint retrospectives
+- `/linear-deps` - Visualize dependency graphs
+- `/linear-link-deps` - Discover and link missing dependencies across backlog
 
 ## CLI Commands
 
@@ -272,10 +272,10 @@ linear deps --team ENG --output json  # JSON for automation
 ```bash
 linear skills list           # List available skills
 linear skills install --all  # Install all skills
-linear skills install prd    # Install specific skill
+linear skills install linear-prd    # Install specific skill
 ```
 
-Available skills: `/linear`, `/prd`, `/triage`, `/cycle-plan`, `/retro`, `/deps`, `/link-deps`
+Available skills: `/linear-reference`, `/linear-prd`, `/linear-triage`, `/linear-cycle-plan`, `/linear-retro`, `/linear-deps`, `/linear-link-deps`
 
 ## Key Design Decisions
 

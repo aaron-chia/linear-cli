@@ -1,5 +1,5 @@
 ---
-name: retro
+name: linear-retro
 description: Analyze completed Linear cycles for retrospectives. Identifies velocity trends, scope creep, and patterns to improve future planning.
 ---
 

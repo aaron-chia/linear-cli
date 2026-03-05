@@ -1,5 +1,5 @@
 ---
-name: triage
+name: linear-triage
 description: Triage and prioritize Linear backlog. Analyzes issues for staleness, blockers, and suggests priorities based on dependencies and capacity.
 ---
 

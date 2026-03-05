@@ -1,5 +1,5 @@
 ---
-name: link-deps
+name: linear-link-deps
 description: Discover and link related issues as dependencies. Searches for issues that should be connected and recommends dependency relationships to establish proper work order.
 ---
 
@@ -339,18 +339,18 @@ For large backlogs (100+ issues), automate discovery:
 
 ## Anti-Patterns to Avoid
 
-❌ **Don't over-link**: Only link true dependencies, not "nice to have" relationships
-❌ **Don't create cycles**: Always verify no circular dependencies
-❌ **Don't link to closed issues**: Check issue state before linking
-❌ **Don't assume**: If unsure whether A blocks B, ask the team
+- **Don't over-link**: Only link true dependencies, not "nice to have" relationships
+- **Don't create cycles**: Always verify no circular dependencies
+- **Don't link to closed issues**: Check issue state before linking
+- **Don't assume**: If unsure whether A blocks B, ask the team
 
 ## Success Metrics
 
-After running link-deps, you should have:
-- ✅ Clear work order (know what to do first)
-- ✅ No circular dependencies
-- ✅ Foundation work identified and prioritized
-- ✅ Blocked work has explicit blockers
-- ✅ Dependency graph visualizes cleanly
+After running linear-link-deps, you should have:
+- Clear work order (know what to do first)
+- No circular dependencies
+- Foundation work identified and prioritized
+- Blocked work has explicit blockers
+- Dependency graph visualizes cleanly
 
 Run `linear deps --team <TEAM>` and you should see a clear tree structure with minimal orphaned issues.

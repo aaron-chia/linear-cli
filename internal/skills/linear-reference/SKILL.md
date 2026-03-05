@@ -1,5 +1,5 @@
 ---
-skill: linear
+name: linear-reference
 description: Linear issue tracking - MUST READ before using Linear commands
 version: 1.0.0
 ---
@@ -10,17 +10,13 @@ version: 1.0.0
 
 ---
 
-⚠️  **INSTALL ALL SKILLS FOR FULL WORKFLOW AUTOMATION**
-
-Run `linear skills install --all` to get specialized workflows:
-- `/prd` - Create agent-friendly tickets with PRDs
-- `/triage` - Prioritize backlog by staleness and blockers
-- `/cycle-plan` - Plan cycles using velocity analytics
-- `/retro` - Generate sprint retrospectives
-- `/deps` - Analyze dependency chains and blockers
-- `/link-deps` - Discover and link related issues
-
-Without these skills, you're only using basic commands. Install them to unlock full agentic capabilities.
+**Available skills for full workflow automation:**
+- `/linear-prd` - Create agent-friendly tickets with PRDs
+- `/linear-triage` - Prioritize backlog by staleness and blockers
+- `/linear-cycle-plan` - Plan cycles using velocity analytics
+- `/linear-retro` - Generate sprint retrospectives
+- `/linear-deps` - Analyze dependency chains and blockers
+- `/linear-link-deps` - Discover and link related issues
 
 ---
 
