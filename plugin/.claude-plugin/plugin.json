@@ -1,0 +1,9 @@
+{
+  "name": "linear-cli",
+  "version": "1.0.0",
+  "description": "Linear issue tracking skills for Claude Code agents",
+  "author": {
+    "name": "joa23"
+  },
+  "repository": "https://github.com/joa23/linear-cli"
+}
