@@ -79,6 +79,14 @@ exists, you must remove it manually first.`,
 			// Determine target directory
 			targetDir := ".claude/skills"
 
+			// Guard: require global install to ~/.claude/skills/
+			absTarget, _ := filepath.Abs(targetDir)
+			home, _ := os.UserHomeDir()
+			globalSkills := filepath.Join(home, ".claude", "skills")
+			if absTarget != globalSkills {
+				return fmt.Errorf("skills must be installed globally to ~/.claude/skills/, not project-level.\nRun from your home directory or use: cd ~ && linear skills install --all")
+			}
+
 			// Create base directory if needed
 			if err := os.MkdirAll(targetDir, 0755); err != nil {
 				return fmt.Errorf("failed to create skills directory: %w", err)
